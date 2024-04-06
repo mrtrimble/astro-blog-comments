@@ -5,16 +5,18 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build",
+    "build": "astro check && astro build --remote",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/check": "^0.5.10",
     "@astrojs/db": "^0.10.1",
     "@astrojs/mdx": "^2.2.4",
     "@astrojs/netlify": "^5.2.0",
     "@astrojs/rss": "^4.0.5",
     "@astrojs/sitemap": "^3.1.2",
-    "astro": "^4.5.16"
+    "astro": "^4.5.16",
+    "typescript": "^5.4.4"
   }
 }

@@ -5,8 +5,6 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import { db, BlogComments, like } from 'astro:db';
-import CommentList from '../components/CommentList.astro';
-import CommentForm from '../components/CommentForm.astro';
 import CommentSystem from '../components/CommentSystem.astro';
 
 type Props = CollectionEntry<'blog'>['data'];
@@ -16,8 +14,6 @@ const { slug } = Astro.params;
 let postComments;
 
 if (slug) postComments = await db.select().from(BlogComments).where(like(BlogComments.post, slug));
-
-console.log(postComments);
 ---
 
 <html lang="en">
