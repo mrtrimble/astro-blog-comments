@@ -1,11 +1,18 @@
 ---
 import CommentForm from './CommentForm.astro';
 import CommentList from './CommentList.astro';
+import { db, BlogComments, like } from 'astro:db';
+const { slug } = Astro.props;
 
-const { comments } = Astro.props;
+console.log({ slug });
+
+let postComments;
+if (slug) postComments = await db.select().from(BlogComments).where(like(BlogComments.post, slug));
+
+console.log({ postComments });
 ---
 
 <div class="container">
   <CommentForm />
-  <CommentList comments={comments} />
+  <CommentList comments={postComments} />
 </div>
