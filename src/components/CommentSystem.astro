@@ -1,0 +1,11 @@
+---
+import CommentForm from './CommentForm.astro';
+import CommentList from './CommentList.astro';
+
+const { comments } = Astro.props;
+---
+
+<div class="container">
+  <CommentForm />
+  <CommentList comments={comments} />
+</div>

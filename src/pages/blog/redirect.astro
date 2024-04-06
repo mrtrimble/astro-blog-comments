@@ -1,0 +1,17 @@
+---
+import { db, BlogComments } from 'astro:db';
+
+if (Astro.request.method === 'POST') {
+  let formData = await Astro.request.formData();
+
+  let author = formData.get('author');
+  let content = formData.get('content');
+  let slug = formData.get('slug');
+
+  if (typeof author === 'string' && typeof content === 'string' && typeof slug === 'string') {
+    await db.insert(BlogComments).values({ author, content, post: slug });
+
+    return Astro.redirect(`/blog/${slug}`);
+  }
+}
+---
