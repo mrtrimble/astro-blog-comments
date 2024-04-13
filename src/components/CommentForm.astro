@@ -1,8 +1,9 @@
 ---
 const { slug } = Astro.params;
+const commentsPostUrl = [Astro.url.origin, '/api/comments/submit'].join('');
 ---
 
-<form method="POST" action="/blog/redirect">
+<form method="POST" action={commentsPostUrl}>
   <h2>Leave a comment</h2>
   <label for="author">
     Your Name
@@ -22,8 +23,6 @@ const { slug } = Astro.params;
 
 <style scoped>
   form {
-    width: min(calc(100% - 1rem), 50ch);
-    margin-inline: auto;
     display: grid;
     label {
       display: grid;

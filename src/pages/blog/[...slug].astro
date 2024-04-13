@@ -3,13 +3,37 @@ import { type CollectionEntry, getCollection } from 'astro:content';
 import BlogPost from '../../layouts/BlogPost.astro';
 import CommentSystem from '../../components/CommentSystem.astro';
 
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: post,
+  }));
+}
+type Props = CollectionEntry<'blog'>;
+const { slug } = Astro.params;
+const post = await Astro.props;
+// console.log({ post });
+// const { Content } = await post.render();
+---
+
+<!-- <BlogPost {...post.data}> -->
+  <!-- <Content /> -->
+  <CommentSystem slug={slug} />
+<!-- </BlogPost> -->
+
+<!-- ---
+import { type CollectionEntry, getCollection } from 'astro:content';
+import BlogPost from '../../layouts/BlogPost.astro';
+
+
 const posts = await getCollection('blog');
 const mappedPosts = posts.map((post) => ({
   params: { slug: post.slug },
   data: post,
 }));
 
-const { slug } = Astro.params;
+
 
 type Props = CollectionEntry<'blog'>;
 
@@ -23,7 +47,7 @@ const { Content, headings } = await data.render();
     <BlogPost {...post.data}>
       <Content />
 
-      <CommentSystem slug={slug} />
+      
     </BlogPost>
   )
-}
+} -->

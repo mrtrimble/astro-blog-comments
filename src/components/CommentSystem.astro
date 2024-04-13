@@ -1,18 +1,22 @@
 ---
-import CommentForm from './CommentForm.astro';
-import CommentList from './CommentList.astro';
-import { db, BlogComments, like } from 'astro:db';
+// import CommentForm from './CommentForm.astro';
+import CommentForm from './CommentForm.vue';
+import CommentList from './CommentList.vue';
 const { slug } = Astro.props;
 
-console.log({ slug });
-
-let postComments;
-if (slug) postComments = await db.select().from(BlogComments).where(like(BlogComments.post, slug));
-
-console.log({ postComments });
+const commentsUrl = [Astro.url.origin, '/api/comments/', slug].join('');
+// console.log({ commentsUrl });
 ---
 
 <div class="container">
-  <CommentForm />
-  <CommentList comments={postComments} />
+  <h2>Post Comments</h2>
+  <CommentForm client:load slug={slug} />
+  <CommentList client:load url={commentsUrl} />
 </div>
+
+<style>
+  .container {
+    width: min(calc(100% - 1rem), 50ch);
+    margin-inline: auto;
+  }
+</style>
