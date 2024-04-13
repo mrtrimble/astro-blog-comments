@@ -5,7 +5,6 @@ import CommentList from './CommentList.vue';
 const { slug } = Astro.props;
 
 const commentsUrl = [Astro.url.origin, '/api/comments/', slug].join('');
-// console.log({ commentsUrl });
 ---
 
 <div class="container">
