@@ -2,7 +2,6 @@
 import { type CollectionEntry, getCollection } from 'astro:content';
 import BlogPost from '../../layouts/BlogPost.astro';
 import CommentSystem from '../../components/CommentSystem.vue';
-export const prerender = true;
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -11,13 +10,16 @@ export async function getStaticPaths() {
     props: post,
   }));
 }
+
 type Props = CollectionEntry<'blog'>;
+
 const post = Astro.props;
-console.log(Astro.url.origin);
 const { Content } = await post.render();
+
+export const prerender = true;
 ---
 
 <BlogPost {...post.data}>
   <Content />
-  <CommentSystem client:load baseUrl={Astro.url.origin} slug={post.slug} />
+  <CommentSystem client:load baseUrl="https://astro-blog-comments.netlify.app" slug={post.slug} />
 </BlogPost>
