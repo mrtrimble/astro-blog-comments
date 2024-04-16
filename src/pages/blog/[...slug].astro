@@ -14,6 +14,7 @@ export async function getStaticPaths() {
 type Props = CollectionEntry<'blog'>;
 
 const post = Astro.props;
+const { origin } = Astro.url;
 const { Content } = await post.render();
 
 export const prerender = true;
@@ -21,5 +22,5 @@ export const prerender = true;
 
 <BlogPost {...post.data}>
   <Content />
-  <CommentSystem client:load baseUrl="https://astro-blog-comments.netlify.app" slug={post.slug} />
+  <CommentSystem client:load baseUrl={origin} slug={post.slug} />
 </BlogPost>

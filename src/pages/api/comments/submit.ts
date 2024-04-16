@@ -3,6 +3,7 @@ import { db, BlogComments } from 'astro:db';
 
 export const POST: APIRoute = async ({ request }) => {
   let data;
+  
   try {
     const body = await request.json();
     const { author, content, slug } = body;
