@@ -8,8 +8,8 @@ import vue from "@astrojs/vue";
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://example.com',
+  site: 'https://astro-blog-comments.netlify.app',
   integrations: [mdx(), sitemap(), db(), vue()],
   output: 'server',
-  adapter: netlify()
+  adapter: netlify(),
 });
